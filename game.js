@@ -35,20 +35,23 @@ function create() {
     bricks = game.add.group();
     bricks.enableBody = true;
     bricks.physicsBodyType = Phaser.Physics.ARCADE;
-   
+    
     var brick;
     for (var y = 0; y < 4; y++)
     {
         for (var x = 0; x < 15; x++)
         {
-            brick = bricks.create(270 + (x * 36), (window.innerHeight * 0.05) + (y * 52), 'breakout', 'brick_' + (y+1) + '_1.png');
+            brick = bricks.create(250 + (x * 36), (window.innerHeight * 0.05) + (y * 52), 'breakout', 'brick_' + (y+1) + '_1.png');
             brick.body.bounce.set(1);
            
             brick.body.immovable = true;
         }
     }
-    bricks.scale.x = 2;
-    bricks.scale.y = 2;
+
+    var scale = window.innerWidth / (250 * 2 + (14 * 36));
+
+    bricks.scale.x = scale;
+    bricks.scale.y = scale;
 
     paddle = game.add.sprite(game.world.centerX, window.innerHeight * 0.85, 'breakout', 'paddle_big.png');
     paddle.anchor.setTo(0.5, 0.5);
@@ -59,15 +62,15 @@ function create() {
     paddle.body.bounce.set(1);
     paddle.body.immovable = true;
     
-    paddle.scale.x = 2;
-    paddle.scale.y = 2;
+    paddle.scale.x = scale;
+    paddle.scale.y = scale;
 
     ball = game.add.sprite(game.world.centerX, paddle.y - 16, 'breakout', 'ball_1.png');
     ball.anchor.set(0.5);
     ball.checkWorldBounds = true;
 
-    ball.scale.x = 2;
-    ball.scale.y = 2;
+    ball.scale.x = scale;
+    ball.scale.y = scale;
 
     game.physics.enable(ball, Phaser.Physics.ARCADE);
 
